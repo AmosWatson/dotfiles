@@ -14,7 +14,9 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
+set relativenumber
 set nu
+set nohlsearch
 set nowrap
 set smartindent
 set noswapfile
@@ -23,6 +25,7 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set colorcolumn=80
+set scrolloff=8
 
 " Tab Changes
 set tabstop=4
