@@ -1,5 +1,6 @@
 from typing import List  # noqa: F401
 
+from libqtile import qtile
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.lazy import lazy
@@ -26,9 +27,9 @@ keys = [
         desc="Move window down in current stack "),
     Key([mod, "shift"], "j", lazy.layout.shuffle_up(),
         desc="Move window up in current stack "),
-    Key([mod], "h", lazy.layout.grow(), lazy.layout.increase_nmaster(),
+    Key([mod], "l", lazy.layout.grow(), lazy.layout.increase_nmaster(),
         desc="Expand master window (monadtall)"),
-    Key([mod], "l", lazy.layout.shrink(), lazy.layout.decrease_nmaster(),
+    Key([mod], "h", lazy.layout.shrink(), lazy.layout.decrease_nmaster(),
         desc="Expand master window (monadtall)"),
     Key([mod, "shift"], "space", lazy.layout.flip(),
         desc="Switch Master Window Side"),
@@ -53,18 +54,26 @@ keys = [
         desc="Launch terminal"),
 
     # Rofi Launcher
-    Key([mod], "p", lazy.spawn("rofi -show drun"),
+    Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun"),
         desc="Rofi Launcher"),
     
     Key([mod, "shift"], "e", lazy.spawn("rofi -show emoji -modi emoji"),
         desc="Rofi emoji"),
 
     # Program Launchers
+
+    # File Manager - Vifm
     Key([mod], "f", lazy.spawn("alacritty -e vifm"),
         desc="Launch File Manager"),
-    Key([mod], "w", lazy.spawn("brave"),
+    # Qutebrowser
+    # Key([mod], "w", lazy.spawn("qutebrowser"),
+    #     desc="Launch Brave Browser"),
+    # Brave Browser
+    Key([mod], "b", lazy.spawn("brave"),
         desc="Launch Brave Browser"),
-
+    # File Manager - Nemo
+    Key([mod, "shift"], "p", lazy.spawn("nemo"),
+        desc="Launch Nemo File Manager"),
 ]
 
 groups = [Group(i) for i in "12345678"]
@@ -85,7 +94,7 @@ for i in groups:
     ])
 
 layout_theme = {"border_width": 2,
-                "margin": 8,
+                "margin": 15,
                 "border_focus": "c1f9f4",
                 "border_normal": "000000",
                }
@@ -109,7 +118,7 @@ layouts = [
 widget_defaults = dict(
     font='Droid Sans Mono',
     fontsize=13,
-    padding=3,
+    padding=2,
     background='#222222',
 )
 
@@ -119,8 +128,9 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                # Shows WorkSpaces
                 widget.Sep(padding=10, foreground='#222222'),
+
+                # Shows WorkSpaces
                 widget.GroupBox(
                     disable_drag=True,
                     use_mouse_wheel=False,
@@ -144,7 +154,8 @@ screens = [
                     foreground='#909090',
                     linewidth=0,
                 ),
-                widget.CurrentLayout(),
+                widget.CurrentLayout(
+                ),
 
                 # Package Updates
                 widget.Sep(
@@ -152,8 +163,13 @@ screens = [
                     foreground='#909090',
                     linewidth=0,
                 ),
-                widget.TextBox('Updates:'),
-                widget.Pacman(update_interval=900),
+                widget.TextBox('🔃',
+                ),
+                widget.CheckUpdates(
+                    distro='Arch',
+                    no_update_string='0',
+                    display_format='{updates}',
+                ),
 
                 # Memory Usage
                 widget.Sep(
@@ -161,8 +177,10 @@ screens = [
                     foreground='#909090',
                     linewidth=0,
                 ),
-                widget.TextBox('Memory:'),
-                widget.Memory(),
+                widget.TextBox('Memory:',
+                ),
+                widget.Memory(
+                ),
 
                 # Volume
                 widget.Sep(
@@ -170,8 +188,10 @@ screens = [
                     foreground='#909090',
                     linewidth=0,
                 ),
-                widget.TextBox('🔉'),
-                widget.Volume(),
+                widget.TextBox('🔉',
+                ),
+                widget.Volume(
+                ),
 
                 # Clock
                 widget.Sep(
@@ -179,8 +199,10 @@ screens = [
                     foreground='#909090',
                     linewidth=0,
                 ),
-				widget.TextBox('🕛'),
-                widget.Clock(format='%I:%M %p %a %d %B'),
+                widget.TextBox('🕐',
+                ),
+                widget.Clock(format='%I:%M %p %a %d %B',
+                ),
 
                 # Systray
                 widget.Sep(
