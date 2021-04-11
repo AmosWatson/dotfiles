@@ -4,8 +4,12 @@ set fish_greeting
 set TERM "xterm-256color"
 set EDITOR "nvim"
 
+# Quit Alias (Fun)
+alias :q='exit'
+
 # nvim alias
 alias vim='nvim'
+alias v='nvim'
 
 # git alias
 alias config='/usr/bin/git --git-dir=$HOME/repos/dotfiles --work-tree=$HOME'
@@ -27,7 +31,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-# confirm overwrite
+# Prompt before removal
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
