@@ -124,7 +124,7 @@ colors = [["#000000", "#000000"],
           ["#a8e6cf", "#a8e6cf"]]
 
 widget_defaults = dict(
-    font='Droid Sans Mono',
+    font='Droid Sans Mono Bold',
     fontsize=13,
     padding=2,
     background='#222222',
