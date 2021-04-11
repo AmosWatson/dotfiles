@@ -1,4 +1,4 @@
-from typing import List  # noqa: F401
+from typing import List
 
 from libqtile import qtile
 from libqtile import bar, layout, widget, hook
@@ -66,13 +66,13 @@ keys = [
     Key([mod], "f", lazy.spawn("alacritty -e vifm"),
         desc="Launch File Manager"),
     # Qutebrowser
-    # Key([mod], "w", lazy.spawn("qutebrowser"),
-    #     desc="Launch Brave Browser"),
+    Key([mod], "w", lazy.spawn("qutebrowser"),
+        desc="Launch Brave Browser"),
     # Brave Browser
     Key([mod], "b", lazy.spawn("brave"),
         desc="Launch Brave Browser"),
     # File Manager - Nemo
-    Key([mod, "shift"], "p", lazy.spawn("nemo"),
+    Key([mod, "shift"], "f", lazy.spawn("nemo"),
         desc="Launch Nemo File Manager"),
 ]
 
@@ -100,20 +100,28 @@ layout_theme = {"border_width": 2,
                }
         
 layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.Max(**layout_theme),
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Columns(),
-    layout.Matrix(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
-    layout.Tile(**layout_theme),
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
+    layout.MonadTall(**layout_theme),
+    layout.Max(**layout_theme),
+    layout.Matrix(**layout_theme),
+    layout.Tile(**layout_theme),
     layout.Floating(**layout_theme),
 ]
+
+colors = [["#000000", "#000000"],
+          ["#B19CD9", "#B19CD9"], 
+          ["#ff8b94", "#ff8b94"], 
+          ["#ffaaa5", "#ffaaa5"], 
+          ["#ffd3b6", "#ffd3b6"], 
+          ["#dcedc1", "#dcedc1"], 
+          ["#a8e6cf", "#a8e6cf"]]
 
 widget_defaults = dict(
     font='Droid Sans Mono',
@@ -148,73 +156,173 @@ screens = [
                 ),
                 widget.WindowName(),
 
+                ####################
+                # MID POINT
+                ####################
+
+                widget.TextBox('',
+                    fontsize=24,
+                    foreground=colors[6],
+                    padding=0,
+                ),
+
                 # Current Layout Mode
                 widget.Sep(
                     padding=10,
-                    foreground='#909090',
+                    background=colors[6],
                     linewidth=0,
                 ),
                 widget.CurrentLayout(
+                    background=colors[6],
+                    foreground=colors[0],
+                ),
+                widget.Sep(
+                    padding=10,
+                    background=colors[6],
+                    linewidth=0,
+                ),
+
+                widget.TextBox('',
+                    fontsize=24,
+                    background=colors[6],
+                    foreground=colors[5],
+                    padding=0,
                 ),
 
                 # Package Updates
                 widget.Sep(
                     padding=10,
-                    foreground='#909090',
+                    background=colors[5],
                     linewidth=0,
                 ),
-                widget.TextBox('🔃',
+                widget.TextBox('↻',
+                    fontsize=16,
+                    background=colors[5],
+                    foreground=colors[0],
                 ),
                 widget.CheckUpdates(
-                    distro='Arch',
+                    distro='Arch_checkupdates',
                     no_update_string='0',
                     display_format='{updates}',
+                    background=colors[5],
+                    foreground=colors[0],
+                    colour_have_updates=colors[0],
+                    colour_no_updates=colors[0],
+                ),
+                widget.Sep(
+                    padding=10,
+                    background=colors[5],
+                    linewidth=0,
+                ),
+
+                widget.TextBox('',
+                    fontsize=24,
+                    background=colors[5],
+                    foreground=colors[4],
+                    padding=0,
                 ),
 
                 # Memory Usage
                 widget.Sep(
                     padding=10,
-                    foreground='#909090',
+                    background=colors[4],
                     linewidth=0,
                 ),
-                widget.TextBox('Memory:',
+                widget.TextBox('🧠',
+                    background=colors[4],
                 ),
                 widget.Memory(
+                    background=colors[4],
+                    foreground=colors[0],
+                ),
+                widget.Sep(
+                    padding=10,
+                    background=colors[4],
+                    linewidth=0,
                 ),
 
+                widget.TextBox('',
+                    fontsize=24,
+                    background=colors[4],
+                    foreground=colors[3],
+                    padding=0,
+                ),
+                
                 # Volume
                 widget.Sep(
                     padding=10,
-                    foreground='#909090',
+                    background=colors[3],
                     linewidth=0,
                 ),
                 widget.TextBox('🔉',
+                    background=colors[3],
                 ),
                 widget.Volume(
+                    background=colors[3],
+                    foreground=colors[0],
+                ),
+                widget.Sep(
+                    padding=10,
+                    background=colors[3],
+                    linewidth=0,
+                ),
+
+                widget.TextBox('',
+                    fontsize=24,
+                    background=colors[3],
+                    foreground=colors[2],
+                    padding=0,
                 ),
 
                 # Clock
                 widget.Sep(
                     padding=10,
-                    foreground='#909090',
+                    background=colors[2],
                     linewidth=0,
                 ),
                 widget.TextBox('🕐',
+                    background=colors[2],
                 ),
                 widget.Clock(format='%I:%M %p %a %d %B',
+                    background=colors[2],
+                    foreground=colors[0],
+                ),
+                widget.Sep(
+                    padding=10,
+                    background=colors[2],
+                    linewidth=0,
+                ),
+
+                widget.TextBox('',
+                    fontsize=24,
+                    background=colors[2],
+                    foreground=colors[1],
+                    padding=0,
                 ),
 
                 # Systray
                 widget.Sep(
                     padding=10,
-                    foreground='#909090',
+                    background=colors[1],
                     linewidth=0,
                 ),
-                widget.Systray(),
+                widget.Systray(
+                    background=colors[1],
+                ),
+                widget.Sep(
+                    padding=10,
+                    background=colors[1],
+                    linewidth=0,
+                ),
 
-                widget.Sep(padding=10, foreground='#222222'),
+                # END
+                widget.Sep(
+                    padding=10,
+                    background=colors[1],
+                    linewidth=0,
+                ),
             ],
-            24,
+            20,
         ),
     ),
 ]
