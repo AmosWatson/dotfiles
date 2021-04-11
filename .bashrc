@@ -26,6 +26,10 @@ fi
 
 # neovim
 alias vim='nvim'
+alias v='nvim'
+
+# Vim quit Bash
+alias :q='exit'
 
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"
@@ -36,6 +40,9 @@ alias la='exa -al --color=always --group-directories-first'
 alias ll='ls -la'
 alias l='ls'
 alias l.="ls -A | egrep '^\.'"
+
+# config shortcuts
+alias qtileconf='vim ~/.config/qtile/config.py'
 
 # Copy command
 alias cp='cp -i'
