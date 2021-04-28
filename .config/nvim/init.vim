@@ -26,11 +26,27 @@ set undofile
 set incsearch
 set colorcolumn=80
 set scrolloff=8
+set mouse=a
 
 " Tab Changes
-set tabstop=4
+set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
+
+let mapleader = " "
+let g:netrw_banner = 0
+let g:netrw_browse_split = 2
+let g:netrw_winsize = 25
+
+" Key ReMaps
+" nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30 <bar> :wincmd R<CR>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30 <CR>
+
+" Split Navigation
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>l :wincmd l<CR>
 
 " lightline statusBar + theme
 set noshowmode
@@ -45,3 +61,14 @@ let g:neotrix_dark_contrast = 'retro'
 syntax on
 colorscheme neotrix
 set termguicolors
+
+" fun! TrimWhitespace()
+"     let l:save = winsaveview()
+"     keeppatterns %s/\s\+$//e
+"     call winrestview(l:save)
+" end fun
+" 
+" augroup desktop
+"     autocmd!
+"     autocmd BufWritePre * :call TrimWhitespace()
+" augroup END
