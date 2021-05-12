@@ -12,6 +12,9 @@ call plug#begin('~/.vim/plugged')
     " Statusbar
     Plug 'itchyny/lightline.vim',
 
+    " NerdTree
+    Plug 'preservim/nerdtree',
+
 call plug#end()
 
 set relativenumber
@@ -39,8 +42,11 @@ let g:netrw_browse_split = 2
 let g:netrw_winsize = 25
 
 " Key ReMaps
-" nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30 <bar> :wincmd R<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30 <CR>
+" NERDTree
+nnoremap <C-n> :NERDTree <CR>
+nnoremap <C-t> :NERDTreeToggle <CR>
+nnoremap <C-f> :NERDTreeFind <CR>
+
 
 " Split Navigation
 nnoremap <leader>j :wincmd j<CR>
@@ -61,6 +67,10 @@ let g:neotrix_dark_contrast = 'retro'
 syntax on
 colorscheme neotrix
 set termguicolors
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
 
 " fun! TrimWhitespace()
 "     let l:save = winsaveview()
