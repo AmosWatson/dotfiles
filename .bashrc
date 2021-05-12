@@ -13,8 +13,12 @@
 [[ $- != *i* ]] && return
 
 export HISTCONTROL=ignoreboth:erasedups
+export EDITOR=nvim
 
 PS1='[\u@\h \W]\$ '
+
+# PROMPT
+export PS1=" \W\e[0;31m ❯\e[0m\e[1;33m❯\e[0m\e[0;32m❯\e[0m "
 
 if [ -d "$HOME/.bin" ] ;
   then PATH="$HOME/.bin:$PATH"
@@ -42,7 +46,12 @@ alias l='ls'
 alias l.="ls -A | egrep '^\.'"
 
 # config shortcuts
-alias qtileconf='vim ~/.config/qtile/config.py'
+alias qtileconf='nvim ~/.config/qtile/config.py'
+alias brc='nvim ~/.bashrc'
+alias vconf='nvim ~/.config/nvim/init.vim'
+
+# Config Git
+alias config='/usr/bin/git --git-dir=$HOME/repos/dotfiles --work-tree=$HOME'
 
 # Copy command
 alias cp='cp -i'
@@ -234,8 +243,8 @@ ex ()
 
 [[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
 
-nerdfetch
-echo ''
+# nerdfetch
+# echo ''
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/amos/.sdkman"
