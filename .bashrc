@@ -18,7 +18,8 @@ export EDITOR=nvim
 PS1='[\u@\h \W]\$ '
 
 # PROMPT
-export PS1=" \W\e[0;31m ❯\e[0m\e[1;33m❯\e[0m\e[0;32m❯\e[0m "
+# export PS1='\[\e[01;33m\][\W]\[\e[01;34m\] > \[\e[m\]'
+export PS1=' \W\[\e[01;31m\] ❯\[\e[01;33m\]❯\[\e[01;32m\]❯ \[\e[m\]'
 
 if [ -d "$HOME/.bin" ] ;
   then PATH="$HOME/.bin:$PATH"
@@ -27,6 +28,9 @@ fi
 if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Add Doom commands to PATH
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # neovim
 alias vim='nvim'
@@ -49,6 +53,7 @@ alias l.="ls -A | egrep '^\.'"
 alias qtileconf='nvim ~/.config/qtile/config.py'
 alias brc='nvim ~/.bashrc'
 alias vconf='nvim ~/.config/nvim/init.vim'
+alias termconf='nvim ~/.config/alacritty/alacritty.yml'
 
 # Config Git
 alias config='/usr/bin/git --git-dir=$HOME/repos/dotfiles --work-tree=$HOME'

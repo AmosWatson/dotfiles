@@ -50,18 +50,28 @@ keys = [
         desc="Volumue Mute Toggle"),
 
     # Terminal Launch
-    Key([mod], "Return", lazy.spawn("alacritty -e fish"), 
+    Key([mod], "Return", lazy.spawn("alacritty"), 
         desc="Launch terminal"),
+    Key([mod], "t", lazy.spawn("st"),
+        desc="Launch st Terminal"),
 
-    # Rofi Launcher
-    Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun"),
+    # Dmenu
+    Key([mod, "shift"], "Return", lazy.spawn("dmenu_run"),
         desc="Rofi Launcher"),
+
+    # # Rofi Launcher
+    # Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun"),
+    #     desc="Rofi Launcher"),
     
+    # Rofi Emojis
     Key([mod, "shift"], "e", lazy.spawn("rofi -show emoji -modi emoji"),
         desc="Rofi emoji"),
 
     # Program Launchers
 
+    # DOOM EMACS
+    Key([mod], "e", lazy.spawn("emacs"),
+        desc="Launch Emacs"),
     # File Manager - Vifm
     Key([mod], "f", lazy.spawn("alacritty -e vifm"),
         desc="Launch File Manager"),
@@ -71,9 +81,9 @@ keys = [
     # Brave Browser
     Key([mod], "b", lazy.spawn("brave"),
         desc="Launch Brave Browser"),
-    # File Manager - Nemo
-    Key([mod, "shift"], "f", lazy.spawn("nemo"),
-        desc="Launch Nemo File Manager"),
+    # File Manager - pcmanfm
+    Key([mod, "shift"], "f", lazy.spawn("pcmanfm"),
+        desc="Launch pcmanfm File Manager"),
 ]
 
 groups = [Group(i) for i in "12345678"]
@@ -87,31 +97,27 @@ for i in groups:
         # mod1 + shift + letter of group = switch to & move focused window to group
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
             desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
     ])
 
 layout_theme = {"border_width": 2,
-                "margin": 15,
+                "margin": 2,
                 "border_focus": "c1f9f4",
                 "border_normal": "000000",
                }
         
 layouts = [
     # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Columns(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    # layout.Bsp(**layout_theme),
+    # layout.Columns(**layout_theme),
+    # layout.RatioTile(**layout_theme),
+    # layout.TreeTab(**layout_theme),
+    # layout.VerticalTile(**layout_theme),
+    # layout.Matrix(**layout_theme),
+    # layout.Tile(**layout_theme),
+    # layout.Zoomy(**layout_theme),
     layout.MonadTall(**layout_theme),
+    layout.MonadWide(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Matrix(**layout_theme),
-    layout.Tile(**layout_theme),
     layout.Floating(**layout_theme),
 ]
 
@@ -124,8 +130,9 @@ colors = [["#000000", "#000000"],
           ["#a8e6cf", "#a8e6cf"]]
 
 widget_defaults = dict(
-    font='Droid Sans Mono',
-    fontsize=13,
+    # font='Droid Sans Mono',
+    font='Ubuntu Mono',
+    fontsize=16,
     padding=2,
     background='#222222',
 )
@@ -143,7 +150,7 @@ screens = [
                     disable_drag=True,
                     use_mouse_wheel=False,
                     inactive='#949494',
-                    spacing=8,
+                    # spacing=2,
                     highlight_method='block',
                     this_current_screen_border='#227db5',
                 ),
@@ -322,7 +329,7 @@ screens = [
                     linewidth=0,
                 ),
             ],
-            22,
+            20,
         ),
     ),
 ]
