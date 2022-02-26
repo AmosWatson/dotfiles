@@ -1,0 +1,11 @@
+#!/bin/bash
+num=$(checkupdates | wc -l)
+
+# If there is only 1 Updates write "Update" not "Updates"
+if [[ $num = "1" ]]; then
+    echo "$num Update"
+else
+    echo "$num Updates"
+fi
+
+exit 0

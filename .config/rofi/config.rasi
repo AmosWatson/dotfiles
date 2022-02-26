@@ -1,0 +1,6 @@
+configuration {
+    modi: "run,drun,keys";
+    terminal: "alacritty";
+}
+@theme "/home/amos/.config/rofi/themes/slate.rasi"
+@import "/home/amos/.config/rofi/themes/slate.rasi"

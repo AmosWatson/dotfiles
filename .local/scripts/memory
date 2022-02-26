@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mem="$(free --mega | awk '/^Mem:/ {print $3}')"
+echo -e "$mem Mbs"
